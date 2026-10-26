@@ -703,13 +703,6 @@ button {
   animation-delay: var(--bob-delay, 0s);
 }
 
-.lane[data-char="ryung"] .char-sprite > svg {
-  height: 88%;
-}
-
-.lane[data-char="rice"] .char-sprite > svg {
-  height: 92%;
-}
 
 .char-distance {
   position: relative;
@@ -2329,55 +2322,74 @@ button {
   white-space: nowrap;
 }
 
-.roster-preview {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: clamp(2px, 1vw, 12px);
-  min-height: clamp(46px, 8vh, 76px);
-  margin: clamp(6px, 1.2vh, 12px) 0 2px;
+.player-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 4px;
 }
 
-.roster-chip {
+.player-chip {
   --accent: #ffd34d;
-  flex: 0 1 92px;
-  min-width: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 2px solid #0b0615;
+  border-left: 4px solid var(--accent);
+  border-radius: 7px;
+  background: linear-gradient(180deg, #3a275c, #2b1a45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    2px 2px 0 #0b0615;
 }
 
-.roster-sprite {
+.player-sprite {
+  flex: 0 0 auto;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  width: 100%;
-  height: clamp(42px, 7.4vh, 68px);
+  width: clamp(28px, 3.4vw, 38px);
+  height: clamp(34px, 4.2vw, 46px);
 }
 
-.roster-sprite > svg {
+.player-sprite > svg {
   display: block;
   width: auto;
   height: 100%;
   max-width: 100%;
   overflow: visible;
-  filter: drop-shadow(1px 2px 0 rgba(12, 31, 16, 0.35));
-  animation: idleBob 2.4s ease-in-out infinite;
+  filter: drop-shadow(1px 2px 0 rgba(12, 31, 16, 0.32));
 }
 
-.roster-name {
-  max-width: 100%;
-  padding: 1px 6px 0;
-  overflow: hidden;
-  border: 1px solid #0b0615;
-  border-radius: 3px;
-  color: #1c102d;
-  background: var(--accent);
-  font-size: clamp(7px, 0.78vw, 10px);
-  line-height: 1.4;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.player-name {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 6px 3px;
+  border: 2px solid #0b0615;
+  border-radius: 4px;
+  outline: none;
+  color: #2b1a45;
+  background: #f8f0dc;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.18);
+  font: inherit;
+  font-size: clamp(9px, 0.92vw, 12px);
+  text-align: left;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.player-name::placeholder {
+  color: #9b8aa8;
+}
+
+.player-name:focus {
+  border-color: #7b4fb8;
+  box-shadow:
+    0 0 0 2px var(--yellow),
+    inset 0 2px 3px rgba(0, 0, 0, 0.18);
 }
 
 .start-btn {
@@ -2481,12 +2493,14 @@ button {
     font-size: 15px;
   }
 
-  .roster-preview {
-    min-height: 44px;
+  .player-sprite {
+    width: 28px;
+    height: 34px;
   }
 
-  .roster-sprite {
-    height: 40px;
+  .player-name {
+    padding: 3px 5px 2px;
+    font-size: 9px;
   }
 
   .setup-btn {
@@ -2505,13 +2519,13 @@ button {
     font-size: clamp(14px, 2vw, 20px);
   }
 
-  .roster-sprite {
-    height: clamp(34px, 6vh, 50px);
+  .player-sprite {
+    width: 26px;
+    height: 32px;
   }
 
-  .roster-preview {
-    min-height: 38px;
-    margin: 4px 0 0;
+  .player-chip {
+    padding: 3px 5px;
   }
 
   .start-btn {
