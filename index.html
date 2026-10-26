@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1b1233">
+  <meta name="description" content="캐릭터 성별과 인원을 고르고 즐기는 운빨 골프 대결! 터치 한 번으로 모두가 동시에 샷을 날리고, 물과 벙커를 피해 가장 멀리 보낸 캐릭터가 우승합니다.">
+  <title>복불복 골프 - Lucky Golf Shot</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient-dot dot-a"></span>
+    <span class="ambient-dot dot-b"></span>
+    <span class="ambient-dot dot-c"></span>
+    <span class="ambient-grid"></span>
+  </div>
+
+  <main class="arcade" id="gameFrame" aria-label="복불복 골프 게임">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-kicker">LUCKY SHOT</span>
+        <h1>복불복 <em>GOLF</em></h1>
+      </div>
+
+      <div class="status-wrap">
+        <span class="status-light" aria-hidden="true"></span>
+        <p class="status-message" id="message" role="status" aria-live="polite">캐릭터 성별과 인원을 선택하세요!</p>
+      </div>
+
+      <button class="sound-btn" id="soundBtn" type="button" aria-pressed="false" aria-label="효과음 끄기">
+        <span class="sound-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="soundLabel">SFX ON</span>
+      </button>
+    </header>
+
+    <section class="course" id="course" aria-label="골프 코스">
+      <div class="course-sky" aria-hidden="true">
+        <span class="cloud cloud-a"></span>
+        <span class="cloud cloud-b"></span>
+        <span class="sun"></span>
+        <span class="mountain mountain-a"></span>
+        <span class="mountain mountain-b"></span>
+        <span class="tree-line"></span>
+      </div>
+
+      <div class="lane-zone" id="laneZone"></div>
+
+      <div class="pond" id="pond" aria-hidden="true">
+        <span class="pond-lip pond-lip-left"></span>
+        <span class="pond-lip pond-lip-right"></span>
+        <span class="pond-sign">해저드</span>
+        <span class="pond-wave wave-a"></span>
+        <span class="pond-wave wave-b"></span>
+        <span class="pond-wave wave-c"></span>
+        <span class="pond-reed reed-a"></span>
+        <span class="pond-reed reed-b"></span>
+        <span class="pond-reed reed-c"></span>
+      </div>
+
+      <div class="bunker-hazard" aria-hidden="true">
+        <span class="bunker-sign">벙커</span>
+        <span class="sand-mark sand-mark-a"></span>
+        <span class="sand-mark sand-mark-b"></span>
+        <span class="sand-mark sand-mark-c"></span>
+        <span class="bunker-rake"></span>
+      </div>
+
+      <div class="distance-ruler" aria-hidden="true">
+        <span class="ruler-mark mark-100"><b>100</b><i>m</i></span>
+        <span class="ruler-mark mark-200"><b>200</b><i>m</i></span>
+        <span class="ruler-mark mark-300"><b>300</b><i>m</i></span>
+      </div>
+
+      <section class="setup" id="setup" aria-label="게임 설정">
+        <div class="setup-card">
+          <p class="setup-kicker">GET READY</p>
+          <h2 class="setup-title">누구와 함께 <em>샷</em>할까요?</h2>
+
+          <div class="setup-field">
+            <span class="setup-label">캐릭터 성별</span>
+            <div class="gender-picker" role="radiogroup" aria-label="캐릭터 성별">
+              <button class="gender-btn is-active" type="button" data-gender="female" role="radio" aria-checked="true">
+                <span class="gender-glyph" aria-hidden="true">♀</span>
+                <span class="gender-text"><b>여자</b><small>RIBBON TEAM</small></span>
+              </button>
+              <button class="gender-btn" type="button" data-gender="male" role="radio" aria-checked="false">
+                <span class="gender-glyph" aria-hidden="true">♂</span>
+                <span class="gender-text"><b>남자</b><small>CAP TEAM</small></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="setup-field">
+            <span class="setup-label">참가 인원</span>
+            <div class="count-picker" role="radiogroup" aria-label="참가 인원">
+              <button class="count-btn" type="button" data-count="2" role="radio" aria-checked="false">2명</button>
+              <button class="count-btn" type="button" data-count="3" role="radio" aria-checked="false">3명</button>
+              <button class="count-btn is-active" type="button" data-count="4" role="radio" aria-checked="true">4명</button>
+            </div>
+          </div>
+
+          <div class="roster-preview" id="rosterPreview" aria-hidden="true"></div>
+
+          <button class="start-btn" id="startBtn" type="button">티오프!</button>
+          <p class="setup-note">물 / 벙커에 빠지면 우승 불가 · 가장 멀리 보낸 캐릭터 승리</p>
+        </div>
+      </section>
+
+      <div class="tap-hint" id="tapHint">
+        <span class="tap-ring" aria-hidden="true"></span>
+        <strong>TAP TO SWING!</strong>
+        <small>화면을 터치!</small>
+      </div>
+
+      <div class="luck-flash" id="luckFlash" aria-hidden="true">LUCK!</div>
+      <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+      <div class="screen-shine" aria-hidden="true"></div>
+      <div class="scanlines" aria-hidden="true"></div>
+    </section>
+
+    <footer class="bottombar">
+      <p class="rules" id="rules"><span class="keycap">SPACE</span> 또는 <span class="keycap">TAP</span> 으로 한 번에 샷!</p>
+      <p class="hazard-note">물 / 벙커에 빠지면 우승 불가 · 가장 멀리 보낸 캐릭터 승리</p>
+      <button class="setup-btn" id="setupBtn" type="button" hidden>설정 변경</button>
+      <button class="replay-btn" id="replayBtn" type="button" hidden>한 번 더!</button>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
